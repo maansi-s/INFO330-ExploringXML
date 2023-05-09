@@ -22,7 +22,7 @@
      Use that same query with the XPath count() function to return the
      number of nodes that are returned by that query. -->
 <xsl:template match="/pokedex">
-    Strong attackers: <xsl:value-of select="" />
+    Strong attackers: <xsl:value-of select="/pokedex" />
     <xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
     Strong defenders:
     <xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
