@@ -19,14 +19,15 @@
   formatted HTML file.
   -->
 <xsl:template match="/pokedex">
-Single type pokemon: <xsl:value-of select="XPATH-QUERY-GOES-HERE" />:
-
-<xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
+  Single type pokemon:
+  <xsl:apply-templates select="pokemon[count(type) = 1]" />
 </xsl:template>
 
 <xsl:template match="pokemon">
-    <xsl:value-of select="XPATH-QUERY-GOES-HERE" /> (<xsl:value-of select="XPATH-QUERY-GOES-HERE" />): <xsl:value-of select="XPATH-QUERY-GOES-HERE" /> | <xsl:value-of select="XPATH-QUERY-GOES-HERE" /> |
+  <xsl:text>&#x9;</xsl:text>
+  <xsl:value-of select="name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:apply-templates select="@classification" /> (<xsl:value-of select="type"/>)
 </xsl:template>
+
 
 <!--
   These rules will generate HTML output rather than text. This is to demonstrate

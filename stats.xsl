@@ -22,18 +22,29 @@
      Use that same query with the XPath count() function to return the
      number of nodes that are returned by that query. -->
 <xsl:template match="/pokedex">
-    Strong attackers: <xsl:value-of select="/pokedex" />
-    <xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
+    Strong attackers:
+    <xsl:for-each select="pokemon[attack &gt; 150]">
+        <xsl:text>&#x9;</xsl:text>
+        <xsl:value-of select="name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:apply-templates select="@classification" /> (<xsl:value-of select="type"/>)
+    </xsl:for-each>
+
     Strong defenders:
-    <xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
+    <xsl:for-each select="pokemon[defense &gt; 150]">
+        <xsl:text>&#x9;</xsl:text>
+        <xsl:value-of select="name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:apply-templates select="@classification" /> (<xsl:value-of select="type"/>)
+    </xsl:for-each>
+
     Fast:
-    <xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
+    <xsl:for-each select="pokemon[speed &gt; 150]">
+        <xsl:text>&#x9;</xsl:text>
+        <xsl:value-of select="name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:apply-templates select="@classification" /> (<xsl:value-of select="type"/>)
+    </xsl:for-each>
 </xsl:template>
 
 <!-- In this template, select the name, pokedexNumber, and type in each of the value-of
      statements, respectively. -->
 <xsl:template match="pokemon">
-    <xsl:value-of select="XPATH-QUERY-GOES-HERE" /> (<xsl:value-of select="XPATH-QUERY-GOES-HERE" />): <xsl:apply-templates select="type" />
+    <xsl:value-of select="name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:apply-templates select="@classification" />
 </xsl:template>
 
 <!--
@@ -50,7 +61,7 @@
 <xsl:template match="/pokedex">
   <html>
   <body>
-  <h2>Strong Attackers: <xsl:value-of select="XPATH-QUERY-GOES-HERE" /></h2>
+  <h2>Strong Attackers: <xsl:value-of select="count(pokemon[attack &gt; 150])"/></h2>
   <table border="1">
     <tr bgcolor="#9acd32">
       <th>Name</th>
